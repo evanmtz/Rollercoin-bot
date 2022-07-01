@@ -26,12 +26,12 @@ except:
     driver.quit()
 
 email = driver.find_element(By.NAME, 'mail')
-email.send_keys('EMAIL')
+email.send_keys('EMAIL_HERE')
 
 time.sleep(2)
 
 password = driver.find_element(By.NAME, 'password')
-password.send_keys('PASSWORD')
+password.send_keys('PASSWORD_HERE')
 
 time.sleep(1)
 pyautogui.scroll(-50)
@@ -43,12 +43,12 @@ log_in_button.click()
 
 time.sleep(5)
 
-pyautogui.moveTo(277, 347, 1.5)
-
-#recharge_btn = driver.find_element(By.CLASS_NAME, "tree-dimensional-button btn-cyan electricity-recharge-btn")
-#recharge_btn.click()
-
-# time.sleep(3)
-# pyautogui.moveTo(650, 947, 1)
-# verify = driver.find_element(By.CLASS_NAME, "geetest_radar_tip")
-# verify.click()
+try:
+    element = WebDriverWait(driver, 30).until(
+        EC.presence_of_element_located((By.XPATH, "//div[@class='electricity-recharge-btn-container']//button[@class='tree-dimensional-button btn-cyan electricity-recharge-btn ']")))
+    pyautogui.moveTo(288, 498, 2.5)
+    element.click()
+    time.sleep(2)
+    driver.quit
+except:
+    print("Unable to locate element.")
